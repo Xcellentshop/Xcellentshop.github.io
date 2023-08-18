@@ -122,13 +122,12 @@
     <div class="microphone-icon">
       <i class="fas fa-microphone"></i>
     </div>
-<div class="message-icon">
-    <i class="fas fa-check"></i>
-  </div>
-
+    <div class="delivered-message">
+      <i class="fas fa-check"></i>
+    </div>
   </div>
   
-  <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
+<script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
@@ -139,7 +138,7 @@
       const currentTimeElement = document.querySelector('.plyr__time--current');
       const durationElement = document.querySelector('.plyr__time--duration');
       const microphoneIcon = document.querySelector('.microphone-icon');
-      const messageIcon = document.querySelector('.message-icon');
+      const deliveredMessage = document.querySelector('.delivered-message');
 
       currentTimeElement.classList.add('hide'); // Adiciona a classe 'hide' ao iniciar
 
@@ -148,7 +147,8 @@
         durationElement.classList.add('hide');
         microphoneIcon.classList.add('blue'); // Adiciona a classe 'blue' para alterar a cor do ícone
         audioElement.classList.add('blue'); // Adiciona a classe 'blue' para alterar o background do controle deslizante
-        audioElement.style.setProperty('--range-thumb-background', '#3db8ee');
+        deliveredMessage.classList.remove('gray');
+        deliveredMessage.classList.add('blue');
       });
 
       audioElement.addEventListener('pause', function() {
@@ -174,12 +174,9 @@
         const playButton = audioContainer.querySelector('.plyr__controls button[data-plyr="play"]');
         playButton.click();
       });
-    messageIcon.addEventListener('click', function() {
-      messageIcon.classList.toggle('blue');
-    });
-
     });
   </script>
+
 
 
 </body></html>
