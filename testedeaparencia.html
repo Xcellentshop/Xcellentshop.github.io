@@ -110,39 +110,22 @@
     .plyr--audio .plyr__controls .plyr__controls__item.plyr__time--duration.hide {
       display: none;
     }
-	
-	    .custom-progress {
-      width: 100%;
-      height: 4px; /* Altura da barra de progresso */
-      background-color: #ddd; /* Cor de fundo da barra de progresso */
-      position: relative;
-      margin-top: 10px; /* Espaço entre a imagem e a barra de progresso */
-    }
-
-    .custom-progress .progress-bar {
-      width: 0;
-      height: 100%;
-      background-color: #3db8ee; /* Cor da barra de progresso preenchida */
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
 
   </style>
 </head>
 <body>
   <div class="audio-container" id="audioContainer">
     <!-- Cole o link do Seu áudio Abaixo-->
-    <audio class="plyr" src="https://file.atendimentochat.store/Presente%20e%20palnos%20(2)%20(online-audio-converter.com).mp3"></audio>
+    <audio class="plyr" src="https://file.atendimentochat.store/WhatsApp-Ptt-2023-08-11-at-13.12.19.mp3"></audio>
     <!-- Cole o link da Sua imagem Abaixo-->
     <img src="https://file.atendimentochat.store/Peter-954x1024.jpg" alt="Imagem">
     <div class="microphone-icon">
       <i class="fas fa-microphone"></i>
     </div>
+<div class="message-icon">
+    <i class="fas fa-check"></i>
   </div>
-  
-    <div class="custom-progress">
-    <div class="progress-bar"></div>
+
   </div>
   
   <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
@@ -153,10 +136,10 @@
       });
 
       const audioElement = document.querySelector('.plyr');
-	  const progressBar = document.querySelector('.progress-bar');
       const currentTimeElement = document.querySelector('.plyr__time--current');
       const durationElement = document.querySelector('.plyr__time--duration');
       const microphoneIcon = document.querySelector('.microphone-icon');
+      const messageIcon = document.querySelector('.message-icon');
 
       currentTimeElement.classList.add('hide'); // Adiciona a classe 'hide' ao iniciar
 
@@ -166,11 +149,6 @@
         microphoneIcon.classList.add('blue'); // Adiciona a classe 'blue' para alterar a cor do ícone
         audioElement.classList.add('blue'); // Adiciona a classe 'blue' para alterar o background do controle deslizante
         audioElement.style.setProperty('--range-thumb-background', '#3db8ee');
-		
-		audioElement.addEventListener('timeupdate', function() {
-        const progress = (audioElement.currentTime / audioElement.duration) * 100;
-        progressBar.style.width = `${progress}%`;
-		
       });
 
       audioElement.addEventListener('pause', function() {
@@ -196,6 +174,10 @@
         const playButton = audioContainer.querySelector('.plyr__controls button[data-plyr="play"]');
         playButton.click();
       });
+    messageIcon.addEventListener('click', function() {
+      messageIcon.classList.toggle('blue');
+    });
+
     });
   </script>
 
