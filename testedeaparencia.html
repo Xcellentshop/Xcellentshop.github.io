@@ -113,8 +113,7 @@
 
   </style>
 </head>
-<body>
-  <div class="audio-container" id="audioContainer">
+<div class="audio-container" id="audioContainer">
     <!-- Cole o link do Seu áudio Abaixo-->
     <audio class="plyr" src="https://file.atendimentochat.store/WhatsApp-Ptt-2023-08-11-at-13.12.19.mp3"></audio>
     <!-- Cole o link da Sua imagem Abaixo-->
@@ -125,9 +124,12 @@
     <div class="delivered-message">
       <i class="fas fa-check"></i>
     </div>
+    <div class="delivered-message">
+      <i class="fas fa-check"></i>
+    </div>
   </div>
   
-<script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
+  <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
@@ -138,7 +140,8 @@
       const currentTimeElement = document.querySelector('.plyr__time--current');
       const durationElement = document.querySelector('.plyr__time--duration');
       const microphoneIcon = document.querySelector('.microphone-icon');
-      const deliveredMessage = document.querySelector('.delivered-message');
+      const deliveredMessage1 = document.querySelector('.delivered-message');
+      const deliveredMessage2 = document.querySelector('.delivered-message');
 
       currentTimeElement.classList.add('hide'); // Adiciona a classe 'hide' ao iniciar
 
@@ -147,8 +150,10 @@
         durationElement.classList.add('hide');
         microphoneIcon.classList.add('blue'); // Adiciona a classe 'blue' para alterar a cor do ícone
         audioElement.classList.add('blue'); // Adiciona a classe 'blue' para alterar o background do controle deslizante
-        deliveredMessage.classList.remove('gray');
-        deliveredMessage.classList.add('blue');
+        deliveredMessage1.classList.remove('gray');
+        deliveredMessage1.classList.add('blue');
+        deliveredMessage2.classList.remove('gray');
+        deliveredMessage2.classList.add('blue');
       });
 
       audioElement.addEventListener('pause', function() {
