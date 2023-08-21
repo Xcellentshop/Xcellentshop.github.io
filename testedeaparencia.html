@@ -129,29 +129,34 @@
     <!-- Cole o link do Seu áudio Abaixo-->
     <audio class="plyr" src="https://file.atendimentochat.store/vendedor3.mp3"></audio>
     <!-- Cole o link da Sua imagem Abaixo-->
-    <img src="https://file.atendimentochat.store/Peter-954x1024.jpg" alt="Imagem">
+    <img src="" alt="Imagem">
+	
     <div class="microphone-icon">
       <i class="fas fa-microphone"></i>
     </div>
-	    <div class="speed-controls">
-      <div class="speed-button" data-speed="1">1x</div>
-      <div class="speed-button" data-speed="1.5">1.5x</div>
-      <div class="speed-button" data-speed="2">2x</div>
-    </div>
+	<div class="speed-controls">
+  <div class="speed-button" data-speed="1.5">1.5x</div>
+</div>
+
   </div>
   
   <script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
   <script>
-  
-      const speedButtons = document.querySelectorAll('.speed-button');
+  document.addEventListener('DOMContentLoaded', function() {
+  const player = new Plyr('.plyr', {
+    controls: ['play', 'progress', 'current-time', 'duration']
+  });
 
-    speedButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const speed = parseFloat(button.getAttribute('data-speed'));
-        player.speed = speed;
-      });
-    });
-	
+  // Resto do seu código existente...
+
+  const speedButton = document.querySelector('.speed-button');
+
+  speedButton.addEventListener('click', () => {
+    player.speed = 1.5;
+  });
+});
+
+  
     document.addEventListener('DOMContentLoaded', function() {
       const player = new Plyr('.plyr', {
         controls: ['play', 'progress', 'current-time', 'duration']
