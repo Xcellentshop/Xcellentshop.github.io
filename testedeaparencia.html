@@ -142,11 +142,9 @@
         controls: ['play', 'progress', 'current-time', 'duration']
       });
 
-      const audioElement = document.querySelector('.plyr');
-      const currentTimeElement = document.querySelector('.plyr__time--current');
-      const durationElement = document.querySelector('.plyr__time--duration');
+   const audioElement = document.querySelector('.plyr');
       const microphoneIcon = document.querySelector('.microphone-icon');
-	  const waveformContainer = document.getElementById('waveform');
+      const waveformContainer = document.getElementById('waveform');
 	  
 	   // Configurar o Wavesurfer
       const wavesurfer = WaveSurfer.create({
@@ -160,17 +158,13 @@
 
       currentTimeElement.classList.add('hide'); // Adiciona a classe 'hide' ao iniciar
 
-      audioElement.addEventListener('play', function() {
-        currentTimeElement.classList.remove('hide');
-        durationElement.classList.add('hide');
-        microphoneIcon.classList.add('blue'); // Adiciona a classe 'blue' para alterar a cor do ícone
-        audioElement.classList.add('blue'); // Adiciona a classe 'blue' para alterar o background do controle deslizante
-        audioElement.style.setProperty('--range-thumb-background', '#3db8ee');
+       audioElement.addEventListener('play', function() {
+        microphoneIcon.classList.add('blue');
+        audioElement.classList.add('blue');
       });
 
-      audioElement.addEventListener('pause', function() {
-        currentTimeElement.classList.add('hide');
-        durationElement.classList.remove('hide');
+     audioElement.addEventListener('pause', function() {
+        microphoneIcon.classList.remove('blue');
       });
 
       const audioContainer = document.getElementById('audioContainer');
@@ -178,6 +172,7 @@
         const playButton = audioContainer.querySelector('.plyr__controls button[data-plyr="play"]');
         playButton.click();
       });
+    
 
       const playPauseButton = document.getElementById('audioContainer').querySelector('.plyr__controls button[data-plyr="play"]');
       const audioBox = document.querySelector('.audio-box');
