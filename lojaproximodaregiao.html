@@ -17,7 +17,7 @@
         .then(data => {
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
-          const mensagem = `Identifiquei a Loja mais próxima da região de ${cidade}, para que seu frete fique muito mais rápido e seguro.`;
+          const mensagem = `Identifiquei a Loja mais próxima da região de<strong> ${cidade}</strong>, para que seu frete fique muito mais rápido e seguro.`;
           exibirMensagem(mensagem);
         })
         .catch(error => {
