@@ -12,8 +12,8 @@
         .then(data => {
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
-          console.log(`Você está em ${cidade}, ${estado}`);
-          exibirMensagem(cidade);
+          const mensagem = `Eu sou da região de ${cidade} e você?`;
+          exibirMensagem(mensagem);
         })
         .catch(error => {
           console.error('Erro ao obter a localização:', error);
@@ -21,10 +21,11 @@
     }
 
     // Função para exibir a mensagem
-    function exibirMensagem(cidade) {
-      const mensagem = `Eu sou da região de ${cidade} e você?`;
-      console.log(mensagem);
-      // Aqui você pode fazer o que quiser com a mensagem, como exibi-la no Typebot.
+    function exibirMensagem(mensagem) {
+      const elementoMensagem = document.createElement('p');
+      elementoMensagem.style.color = 'black'; // Define a cor da mensagem como preto
+      elementoMensagem.textContent = mensagem;
+      document.body.appendChild(elementoMensagem);
     }
 
     // Chama a função ao carregar a página
