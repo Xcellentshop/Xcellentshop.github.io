@@ -2,6 +2,11 @@
 <html>
 <head>
   <title>Identificação da Cidade</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif; /* Fonte semelhante à do WhatsApp */
+    }
+  </style>
 </head>
 <body>
   <script>
@@ -23,7 +28,7 @@
     // Função para exibir a mensagem
     function exibirMensagem(mensagem) {
       const elementoMensagem = document.createElement('p');
-      elementoMensagem.style.color = 'black'; // Define a cor da mensagem como preto
+      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
       elementoMensagem.textContent = mensagem;
       document.body.appendChild(elementoMensagem);
     }
