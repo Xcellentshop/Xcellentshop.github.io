@@ -13,10 +13,18 @@
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
           console.log(`Você está em ${cidade}, ${estado}`);
+          exibirMensagem(cidade);
         })
         .catch(error => {
           console.error('Erro ao obter a localização:', error);
         });
+    }
+
+    // Função para exibir a mensagem
+    function exibirMensagem(cidade) {
+      const mensagem = `Eu sou da região de ${cidade} e você?`;
+      console.log(mensagem);
+      // Aqui você pode fazer o que quiser com a mensagem, como exibi-la no Typebot.
     }
 
     // Chama a função ao carregar a página
