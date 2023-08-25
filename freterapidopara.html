@@ -17,7 +17,7 @@
         .then(data => {
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
-          const mensagem = `O envio é realizado com rapidez para a região de ${cidade}...`;
+          const mensagem = `🚚Lembrando que temos envio prioritário para a região de ${cidade}...`;
           exibirMensagem(mensagem);
         })
         .catch(error => {
