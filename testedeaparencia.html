@@ -9,18 +9,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/geolocation-api/1.6.2/script.geolocation.min.js"></script>
 </head>
 <body>
-    <div class="modelo-celular"></div>
+    <!-- Mensagem em destaque -->
+    <div class="destaque">
+        Identificamos que sua cidade é <span class="cidade"></span> e seu celular é <span class="modelo"></span>.
+    </div>
+
+    <!-- Resto do conteúdo do seu site -->
+    <div class="conteudo">
+        <!-- Conteúdo principal do site aqui -->
+    </div>
 
     <script>
         // Função para exibir o modelo de celular e a cidade
         function exibirModeloECidade(modelo, cidade) {
-            const mensagem = `Seu celular é um ${modelo} e você está em ${cidade}.`;
-            document.querySelector(".modelo-celular").innerHTML = mensagem;
+            const mensagem = `Identificamos que sua cidade é ${cidade} e seu celular é ${modelo}.`;
+            document.querySelector(".destaque").innerHTML = mensagem;
         }
 
         // Função para tratar erros na obtenção da localização
         function erroLocalizacao(error) {
-            document.querySelector(".modelo-celular").innerHTML = "Não foi possível obter a localização.";
+            document.querySelector(".destaque").innerHTML = "Não foi possível obter a localização.";
         }
 
         // Verifica se o dispositivo é um celular
@@ -48,7 +56,7 @@
             }, erroLocalizacao);
         } else {
             // O dispositivo não é um celular
-            document.querySelector(".modelo-celular").innerHTML = "O dispositivo não é um celular.";
+            document.querySelector(".destaque").innerHTML = "Identificamos que seu dispositivo não é um celular.";
         }
     </script>
 </body>
