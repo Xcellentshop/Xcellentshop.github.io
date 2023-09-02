@@ -55,5 +55,32 @@
     // Chama a função ao carregar a página
     window.addEventListener('load', obterCidade);
   </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Mobile-Detect/1.8.18/Mobile_Detect.min.js"></script>
+
+<script>
+    // Verifica se o dispositivo é um celular
+    if (MobileDetect.isMobile()) {
+
+        // Obtém o modelo do celular
+        const modelo = MobileDetect.getDeviceModel();
+
+        // Mostra o modelo do celular
+        document.querySelector(".modelo-celular").innerHTML = modelo;
+
+    } else {
+
+        // O dispositivo não é um celular
+        document.querySelector(".modelo-celular").innerHTML = "O dispositivo não é um celular.";
+
+    }
+</script>
+
+<div class="modelo-celular"></div>
+
+
+
 </body>
 </html>
+
