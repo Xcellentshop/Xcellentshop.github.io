@@ -23,7 +23,7 @@
         }
 
         var modeloDetectado = detectarModeloCelular();
-        document.write("<p>👉: " + modeloDetectado + "</p>");
+        document.write("<p>📲👉: " + modeloDetectado + "</p>");
     </script>
     
     <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
@@ -36,7 +36,7 @@
         .then(data => {
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
-          const mensagem = `👉 ${cidade}...`;
+          const mensagem = `📍👉 ${cidade}...`;
           exibirMensagem(mensagem);
         })
         .catch(error => {
