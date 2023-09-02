@@ -3,87 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identificação de Sistema</title>
+    <title>Detecção de Modelo de Celular e Localização</title>
+    <!-- Inclua as bibliotecas Mobile-Detect e geolocation-api -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Mobile-Detect/1.8.18/Mobile_Detect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/geolocation-api/1.6.2/script.geolocation.min.js"></script>
 </head>
 <body>
-    <h1>Identidade do seu Celular</h1>
-    
-    <!-- Script para detectar o modelo de celular -->
-    <script>
-        function detectarModeloCelular() {
-            if (navigator.userAgent) {
-                var modelosCelular = /iPhone|iPad|iPod|Android|Windows Phone|Mobile|Tablet/i;
-                var userAgent = navigator.userAgent;
+    <div class="modelo-celular"></div>
 
-                if (userAgent.match(modelosCelular)) {
-                    return userAgent;
-                }
-            }
-            return "Modelo não detectado";
+    <script>
+        // Função para exibir o modelo de celular e a cidade
+        function exibirModeloECidade(modelo, cidade) {
+            const mensagem = `Seu celular é um ${modelo} e você está em ${cidade}.`;
+            document.querySelector(".modelo-celular").innerHTML = mensagem;
         }
 
-        var modeloDetectado = detectarModeloCelular();
-        document.write("<p>📲👉 " + modeloDetectado + "</p>");
+        // Função para tratar erros na obtenção da localização
+        function erroLocalizacao(error) {
+            document.querySelector(".modelo-celular").innerHTML = "Não foi possível obter a localização.";
+        }
+
+        // Verifica se o dispositivo é um celular
+        const detect = new MobileDetect(window.navigator.userAgent);
+        if (detect.mobile()) {
+
+            // Obtém o modelo do celular
+            const modelo = detect.mobile();
+
+            // Obtém a cidade do usuário usando geolocalização
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Use um serviço de geolocalização para obter a cidade com base nas coordenadas
+                // Este é apenas um exemplo, você pode usar um serviço de geocodificação adequado
+                // Substitua o URL abaixo pelo serviço de geolocalização real
+                fetch(`https://seuservicodegeolocalizacao.com/?lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const cidade = data.city; // Substitua "city" pelo campo correto em sua resposta
+                        exibirModeloECidade(modelo, cidade);
+                    })
+                    .catch(erroLocalizacao);
+            }, erroLocalizacao);
+        } else {
+            // O dispositivo não é um celular
+            document.querySelector(".modelo-celular").innerHTML = "O dispositivo não é um celular.";
+        }
     </script>
-    
-    <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
-    <h1>Sua Localização:</h1>
-    <script>
-    // Função para obter a localização da cidade
-    function obterCidade() {
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const cidade = data.city || 'Cidade desconhecida';
-          const estado = data.region || 'Estado desconhecido';
-          const mensagem = `📍👉 ${cidade}`;
-          exibirMensagem(mensagem);
-        })
-        .catch(error => {
-          console.error('Erro ao obter a localização:', error);
-        });
-    }
-
-    // Função para exibir a mensagem
-    function exibirMensagem(mensagem) {
-      const elementoMensagem = document.createElement('p');
-      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
-      elementoMensagem.textContent = mensagem;
-      document.body.appendChild(elementoMensagem);
-    }
-
-    // Chama a função ao carregar a página
-    window.addEventListener('load', obterCidade);
-  </script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Mobile-Detect/1.8.18/Mobile_Detect.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/geolocation-api/1.6.2/script.geolocation.min.js"></script>
-
-<script>
-    // Verifica se o dispositivo é um celular
-    if (MobileDetect.isMobile()) {
-
-        // Obtém o modelo do celular
-        const modelo = MobileDetect.getDeviceModel();
-
-        // Obtém a cidade do usuário
-        const cidade = navigator.geolocation.getCurrentPosition().city;
-
-        // Mostra o modelo do celular e a cidade
-        document.querySelector(".modelo-celular").innerHTML = `Seu celular é um ${modelo} e você está em ${cidade}.`;
-
-    } else {
-
-        // O dispositivo não é um celular
-        document.querySelector(".modelo-celular").innerHTML = "O dispositivo não é um celular.";
-
-    }
-</script>
-
-<div class="modelo-celular"></div>
-
-
 </body>
 </html>
-
