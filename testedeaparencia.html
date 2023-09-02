@@ -28,14 +28,32 @@
     
     <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
     <h2>Sua Localização:</h2>
-    <ul>
-        <li>Capinha para iPhone</li>
-        <li>Capinha para Android</li>
-        <!-- Adicione mais recomendações aqui com base nos modelos -->
-    </ul>
-    
-    <footer>
-        <p>Obrigado por visitar nossa loja!</p>
-    </footer>
+    <script>
+    // Função para obter a localização da cidade
+    function obterCidade() {
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const cidade = data.city || 'Cidade desconhecida';
+          const estado = data.region || 'Estado desconhecido';
+          const mensagem = `👉 ${cidade}...`;
+          exibirMensagem(mensagem);
+        })
+        .catch(error => {
+          console.error('Erro ao obter a localização:', error);
+        });
+    }
+
+    // Função para exibir a mensagem
+    function exibirMensagem(mensagem) {
+      const elementoMensagem = document.createElement('p');
+      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
+      elementoMensagem.textContent = mensagem;
+      document.body.appendChild(elementoMensagem);
+    }
+
+    // Chama a função ao carregar a página
+    window.addEventListener('load', obterCidade);
+  </script>
 </body>
 </html>
