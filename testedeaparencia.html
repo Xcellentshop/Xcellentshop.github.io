@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Identificação da Cidade</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', sans-serif; /* Fonte semelhante à do WhatsApp */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Loja de Capinhas de Celular</title>
 </head>
 <body>
-  <script>
-    // Função para obter a localização da cidade
-    function obterCidade() {
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const cidade = data.city || 'Cidade desconhecida';
-          const estado = data.region || 'Estado desconhecido';
-          const mensagem = `Eu sou da região de ${cidade}!`;
-          exibirMensagem(mensagem);
-        })
-        .catch(error => {
-          console.error('Erro ao obter a localização:', error);
-        });
-    }
+    <h1>Bem-vindo à nossa loja de capinhas de celular!</h1>
+    
+    <!-- Script para detectar o modelo de celular -->
+    <script>
+        function detectarModeloCelular() {
+            if (navigator.userAgent) {
+                var modelosCelular = /iPhone|iPad|iPod|Android|Windows Phone|Mobile|Tablet/i;
+                var userAgent = navigator.userAgent;
 
-    // Função para exibir a mensagem
-    function exibirMensagem(mensagem) {
-      const elementoMensagem = document.createElement('p');
-      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
-      elementoMensagem.textContent = mensagem;
-      document.body.appendChild(elementoMensagem);
-    }
+                if (userAgent.match(modelosCelular)) {
+                    return userAgent;
+                }
+            }
+            return "Modelo não detectado";
+        }
 
-    // Chama a função ao carregar a página
-    window.addEventListener('load', obterCidade);
-  </script>
+        var modeloDetectado = detectarModeloCelular();
+        document.write("<p>Identificamos que seu celular é: " + modeloDetectado + "</p>");
+    </script>
+    
+    <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
+    <h2>Recomendações para o seu modelo:</h2>
+    <ul>
+        <li>Capinha para iPhone</li>
+        <li>Capinha para Android</li>
+        <!-- Adicione mais recomendações aqui com base nos modelos -->
+    </ul>
+    
+    <footer>
+        <p>Obrigado por visitar nossa loja!</p>
+    </footer>
 </body>
 </html>
