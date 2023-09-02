@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Loja de Capinhas de Celular</ti<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Loja de Capinhas de Celular</title>
 </head>
 <body>
@@ -19,12 +14,14 @@
             if (navigator.userAgent) {
                 var userAgent = navigator.userAgent;
 
-                // Use expressões regulares para encontrar o nome do modelo.
-                var matches = userAgent.match(/(iPhone|iPad|iPod|Android|Windows Phone|Mobile|Tablet);.*?(\w+\s\w+\s\w+)/i);
-
-                if (matches && matches.length >= 3) {
-                    return matches[2];
+                // Verifica se o user agent contém informações sobre o modelo.
+                if (userAgent.indexOf("Redmi Note 8 Pro") !== -1) {
+                    return "Redmi Note 8 Pro";
+                } else if (userAgent.indexOf("Outro Modelo") !== -1) {
+                    return "Outro Modelo";
                 }
+                // Adicione mais modelos aqui conforme necessário.
+
             }
             return "Modelo não detectado";
         }
@@ -36,44 +33,8 @@
     <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
     <h2>Recomendações para o seu modelo:</h2>
     <ul>
-        <li>Capinha para iPhone</li>
-        <li>Capinha para Android</li>
-        <!-- Adicione mais recomendações aqui com base nos modelos -->
-    </ul>
-    
-    <footer>
-        <p>Obrigado por visitar nossa loja!</p>
-    </footer>
-</body>
-</html>
-tle>
-</head>
-<body>
-    <h1>Bem-vindo à nossa loja de capinhas de celular!</h1>
-    
-    <!-- Script para detectar o modelo de celular -->
-    <script>
-        function detectarModeloCelular() {
-            if (navigator.userAgent) {
-                var modelosCelular = /iPhone|iPad|iPod|Android|Windows Phone|Mobile|Tablet/i;
-                var userAgent = navigator.userAgent;
-
-                if (userAgent.match(modelosCelular)) {
-                    return userAgent;
-                }
-            }
-            return "Modelo não detectado";
-        }
-
-        var modeloDetectado = detectarModeloCelular();
-        document.write("<p>Identificamos que seu celular é: " + modeloDetectado + "</p>");
-    </script>
-    
-    <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
-    <h2>Recomendações para o seu modelo:</h2>
-    <ul>
-        <li>Capinha para iPhone</li>
-        <li>Capinha para Android</li>
+        <li>Capinha para Redmi Note 8 Pro</li>
+        <li>Capinha para Outro Modelo</li>
         <!-- Adicione mais recomendações aqui com base nos modelos -->
     </ul>
     
