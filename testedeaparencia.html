@@ -58,6 +58,7 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Mobile-Detect/1.8.18/Mobile_Detect.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/geolocation-api/1.6.2/script.geolocation.min.js"></script>
 
 <script>
     // Verifica se o dispositivo é um celular
@@ -66,8 +67,11 @@
         // Obtém o modelo do celular
         const modelo = MobileDetect.getDeviceModel();
 
-        // Mostra o modelo do celular
-        document.querySelector(".modelo-celular").innerHTML = modelo;
+        // Obtém a cidade do usuário
+        const cidade = navigator.geolocation.getCurrentPosition().city;
+
+        // Mostra o modelo do celular e a cidade
+        document.querySelector(".modelo-celular").innerHTML = `Seu celular é um ${modelo} e você está em ${cidade}.`;
 
     } else {
 
@@ -78,7 +82,6 @@
 </script>
 
 <div class="modelo-celular"></div>
-
 
 
 </body>
