@@ -6,7 +6,12 @@
     <title>Identificação de Sistema</title>
 </head>
 <body>
-    <h1>Seu sistema está sendo verificado...</h1>
+    <!-- Mensagens de verificação -->
+    <h1>Verificando seu sistema...</h1>
+    <div class="verificando">
+        <p>Verificando modelo de celular...</p>
+        <p>Verificando localização...</p>
+    </div>
     
     <!-- Script para detectar o modelo de celular -->
     <script>
@@ -22,43 +27,44 @@
             return "Modelo não detectado";
         }
 
+        // Função para exibir o resultado do modelo de celular
+        function exibirResultadoModelo(modelo) {
+            document.querySelector(".verificando p:first-child").innerHTML = `Seu celular é um ${modelo}.`;
+        }
+
+        // Chama a função de detecção de modelo após 5 segundos
         setTimeout(function() {
             var modeloDetectado = detectarModeloCelular();
-            document.querySelector("h1").innerHTML = "Seu sistema foi verificado com sucesso!";
-            document.write("<p>📲👉 " + modeloDetectado + "</p>");
+            exibirResultadoModelo(modeloDetectado);
         }, 5000); // Atraso de 5 segundos (5000 milissegundos)
     </script>
     
     <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
-    <h1>Sua Localização Está Sendo Verificada...</h1>
+    <h1>Obtendo sua localização...</h1>
     <script>
-    // Função para obter a localização da cidade
-    function obterCidade() {
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const cidade = data.city || 'Cidade desconhecida';
-          const estado = data.region || 'Estado desconhecido';
-          const mensagem = `📍👉 ${cidade}`;
-          exibirMensagem(mensagem);
-          document.querySelector("h1:last-of-type").innerHTML = "Sua localização foi verificada com sucesso!";
-        })
-        .catch(error => {
-          console.error('Erro ao obter a localização:', error);
-          document.querySelector("h1:last-of-type").innerHTML = "Erro ao verificar a localização.";
-        });
-    }
+        // Função para obter a localização da cidade
+        function obterCidade() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const cidade = data.city || 'Cidade desconhecida';
+                    const estado = data.region || 'Estado desconhecido';
+                    const mensagem = `Você está em ${cidade}.`;
+                    exibirResultadoCidade(mensagem);
+                })
+                .catch(error => {
+                    console.error('Erro ao obter a localização:', error);
+                    exibirResultadoCidade("Erro ao verificar a localização.");
+                });
+        }
 
-    // Função para exibir a mensagem
-    function exibirMensagem(mensagem) {
-      const elementoMensagem = document.createElement('p');
-      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
-      elementoMensagem.textContent = mensagem;
-      document.body.appendChild(elementoMensagem);
-    }
+        // Função para exibir o resultado da cidade
+        function exibirResultadoCidade(mensagem) {
+            document.querySelector(".verificando p:last-child").innerHTML = mensagem;
+        }
 
-    // Chama a função ao carregar a página
-    window.addEventListener('load', obterCidade);
-  </script>
+        // Chama a função de obtenção da cidade ao carregar a página
+        window.addEventListener('load', obterCidade);
+    </script>
 </body>
 </html>
