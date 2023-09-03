@@ -30,7 +30,7 @@
 
         // Função para exibir o resultado do modelo de celular
         function exibirResultadoModelo(modelo) {
-            document.querySelector(".verificando p:nth-child(1)").innerHTML = `✔️ Seu celular é compatível 📲👉 ${modelo}.`;
+            document.querySelector(".verificando p:nth-child(1)").innerHTML = `✅ Seu celular é compatível 📲👉 ${modelo}.`;
         }
 
         // Chama a função de detecção de modelo após 6 segundos
@@ -48,7 +48,7 @@
                 .then(data => {
                     const cidade = data.city || 'Cidade desconhecida';
                     const estado = data.region || 'Estado desconhecido';
-                    const mensagem = `✔️ Sua região é liberada 📍👉 ${cidade}.`;
+                    const mensagem = `✅ Sua região é liberada 📍👉 ${cidade}.`;
                     exibirResultadoCidade(mensagem);
                 })
                 .catch(error => {
@@ -77,7 +77,7 @@
                 // Verifica o tipo de conexão (3g, 4g, etc.)
                 if (conexao.effectiveType) {
                     const tipoConexao = conexao.effectiveType;
-                    const mensagem = `✔️ Sua internet é compatível (${tipoConexao}).`;
+                    const mensagem = `✅ Sua internet é compatível (${tipoConexao}).`;
                     exibirResultadoVelocidade(mensagem);
                 } else {
                     exibirResultadoVelocidade("Não foi possível determinar o tipo de conexão.");
