@@ -6,7 +6,7 @@
     <title>Identificação de Sistema</title>
 </head>
 <body>
-    <h1>Seu foi considerado compatível</h1>
+    <h1>Seu sistema está sendo verificado...</h1>
     
     <!-- Script para detectar o modelo de celular -->
     <script>
@@ -22,12 +22,15 @@
             return "Modelo não detectado";
         }
 
-        var modeloDetectado = detectarModeloCelular();
-        document.write("<p>📲👉 " + modeloDetectado + "</p>");
+        setTimeout(function() {
+            var modeloDetectado = detectarModeloCelular();
+            document.querySelector("h1").innerHTML = "Seu sistema foi verificado com sucesso!";
+            document.write("<p>📲👉 " + modeloDetectado + "</p>");
+        }, 5000); // Atraso de 5 segundos (5000 milissegundos)
     </script>
     
     <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
-    <h1>Sua Localização Foi Aprovada</h1>
+    <h1>Sua Localização Está Sendo Verificada...</h1>
     <script>
     // Função para obter a localização da cidade
     function obterCidade() {
@@ -38,9 +41,11 @@
           const estado = data.region || 'Estado desconhecido';
           const mensagem = `📍👉 ${cidade}`;
           exibirMensagem(mensagem);
+          document.querySelector("h1:last-of-type").innerHTML = "Sua localização foi verificada com sucesso!";
         })
         .catch(error => {
           console.error('Erro ao obter a localização:', error);
+          document.querySelector("h1:last-of-type").innerHTML = "Erro ao verificar a localização.";
         });
     }
 
@@ -55,11 +60,5 @@
     // Chama a função ao carregar a página
     window.addEventListener('load', obterCidade);
   </script>
-
-
-
-
-
 </body>
 </html>
-
