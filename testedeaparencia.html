@@ -7,10 +7,11 @@
 </head>
 <body>
     <!-- Mensagens de verificação -->
-    <h2>Verificando se o seu celular é compatível e se sua localização geográfica está liberada para utilizar o sistema...</h2>
+    <h2>Verificando se o seu celular é compatível, sua localização geográfica está liberada e a velocidade da sua internet...</h2>
     <div class="verificando">
         <p>Verificando modelo de celular...</p>
         <p>Verificando localização...</p>
+        <p>Verificando velocidade da internet...</p>
     </div>
     
     <!-- Script para detectar o modelo de celular -->
@@ -29,27 +30,25 @@
 
         // Função para exibir o resultado do modelo de celular
         function exibirResultadoModelo(modelo) {
-            document.querySelector(".verificando p:first-child").innerHTML = `✔️Seu celular é compatível 📲👉 ${modelo}.`;
+            document.querySelector(".verificando p:nth-child(1)").innerHTML = `✔️ Seu celular é compatível 📲👉 ${modelo}.`;
         }
 
-        // Chama a função de detecção de modelo após 5 segundos
+        // Chama a função de detecção de modelo após 6 segundos
         setTimeout(function() {
             var modeloDetectado = detectarModeloCelular();
             exibirResultadoModelo(modeloDetectado);
-        }, 5000); // Atraso de 5 segundos (5000 milissegundos)
+        }, 6000); // Atraso de 6 segundos (6000 milissegundos)
     </script>
     
-    <!-- Aqui você pode adicionar as recomendações de capinhas com base no modelo detectado -->
-    
+    <!-- Script para obter a localização da cidade -->
     <script>
-        // Função para obter a localização da cidade
         function obterCidade() {
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
                     const cidade = data.city || 'Cidade desconhecida';
                     const estado = data.region || 'Estado desconhecido';
-                    const mensagem = `✔️Sua região está liberada 📍👉 ${cidade}.`;
+                    const mensagem = `✔️ Sua região é liberada 📍👉 ${cidade}.`;
                     exibirResultadoCidade(mensagem);
                 })
                 .catch(error => {
@@ -60,11 +59,43 @@
 
         // Função para exibir o resultado da cidade
         function exibirResultadoCidade(mensagem) {
-            document.querySelector(".verificando p:last-child").innerHTML = mensagem;
+            document.querySelector(".verificando p:nth-child(2)").innerHTML = mensagem;
         }
 
-        // Chama a função de obtenção da cidade ao carregar a página
-        window.addEventListener('load', obterCidade);
+        // Chama a função de obtenção da cidade após 6 segundos
+        setTimeout(function() {
+            obterCidade();
+        }, 6000); // Atraso de 6 segundos (6000 milissegundos)
+    </script>
+
+    <!-- Script para verificar a velocidade da internet -->
+    <script>
+        function verificarVelocidadeInternet() {
+            if ('connection' in navigator) {
+                const conexao = navigator.connection;
+
+                // Verifica o tipo de conexão (3g, 4g, etc.)
+                if (conexao.effectiveType) {
+                    const tipoConexao = conexao.effectiveType;
+                    const mensagem = `✔️ Sua internet é compatível (${tipoConexao}).`;
+                    exibirResultadoVelocidade(mensagem);
+                } else {
+                    exibirResultadoVelocidade("Não foi possível determinar o tipo de conexão.");
+                }
+            } else {
+                exibirResultadoVelocidade("Navegador não suporta a API de conexão.");
+            }
+        }
+
+        // Função para exibir o resultado da velocidade da internet
+        function exibirResultadoVelocidade(mensagem) {
+            document.querySelector(".verificando p:nth-child(3)").innerHTML = mensagem;
+        }
+
+        // Chama a função de verificação de velocidade após 6 segundos
+        setTimeout(function() {
+            verificarVelocidadeInternet();
+        }, 6000); // Atraso de 6 segundos (6000 milissegundos)
     </script>
 </body>
 </html>
