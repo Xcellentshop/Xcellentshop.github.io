@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contador de Vagas</title>
+</head>
+<body>
+    <h1>Vagas Disponíveis: <span id="contadorVagas">19</span></h1>
+
+    <script>
+        // Inicializa o contador com 19 vagas
+        let contador = 19;
+
+        // Função para atualizar o contador de vagas
+        function atualizarContador() {
+            if (contador > 3) {
+                contador--; // Diminui uma vaga
+                document.getElementById("contadorVagas").textContent = contador;
+            }
+        }
+
+        // Define um intervalo de 5 segundos para atualizar o contador
+        const intervalo = setInterval(atualizarContador, 5000);
+
+        // Para o intervalo quando atingir 3 vagas
+        if (contador === 3) {
+            clearInterval(intervalo);
+        }
+    </script>
+</body>
+</html>
