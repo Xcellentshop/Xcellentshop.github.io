@@ -3,7 +3,7 @@
     <title>Contador de Vagas</title>
 </head>
 <body>
-    <h2>🚨Vagas Abertas: <span id="contadorVagas">19</span></h2>
+    <h2>🚨Tenemos <span id="contadorVagas">19</span> vacantes disponibles</h2>
 
     <script>
         // Inicializa o contador com 19 vagas
@@ -35,7 +35,7 @@
                     const cidade = data.city || 'Cidade desconhecida';
                     const estado = data.region || 'Estado desconhecido';
                     const vagasDisponiveis = 7; // Define o número de vagas disponíveis
-                    const mensagem = `Temos (${vagasDisponiveis}) Vagas disponíveis para a região de ${cidade}`;
+                    const mensagem = `Para la región de ${cidade}`;
                     exibirMensagem(mensagem);
                 })
                 .catch(error => {
