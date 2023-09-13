@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Contador de Vagas</title>
 </head>
 <body>
-    <h1 id="mensagemVagas">Temos (7) Vagas disponíveis para a região de (cidade)</h1>
+    <h1>🚨Vagas Abertas: <span id="contadorVagas">19</span></h1>
+
+    <script>
+        // Inicializa o contador com 19 vagas
+        let contador = 19;
+
+        // Função para atualizar o contador de vagas
+        function atualizarContador() {
+            if (contador > 3) {
+                contador--; // Diminui uma vaga
+                document.getElementById("contadorVagas").textContent = contador;
+            }
+        }
+
+        // Define um intervalo de 5 segundos para atualizar o contador
+        const intervalo = setInterval(atualizarContador, 5000);
+
+        // Para o intervalo quando atingir 3 vagas
+        if (contador === 3) {
+            clearInterval(intervalo);
+        }
+    </script>
 
     <script>
         // Função para obter a cidade
@@ -14,13 +33,22 @@
                 .then(response => response.json())
                 .then(data => {
                     const cidade = data.city || 'Cidade desconhecida';
+                    const estado = data.region || 'Estado desconhecido';
                     const vagasDisponiveis = 7; // Define o número de vagas disponíveis
                     const mensagem = `Temos (${vagasDisponiveis}) Vagas disponíveis para a região de ${cidade}`;
-                    document.getElementById("mensagemVagas").textContent = mensagem;
+                    exibirMensagem(mensagem);
                 })
                 .catch(error => {
                     console.error('Erro ao obter a localização:', error);
                 });
+        }
+
+        // Função para exibir a mensagem
+        function exibirMensagem(mensagem) {
+            const elementoMensagem = document.createElement('p');
+            elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
+            elementoMensagem.textContent = mensagem;
+            document.body.appendChild(elementoMensagem);
         }
 
         // Chama a função ao carregar a página
@@ -36,6 +64,3 @@
         }
     </style>
 </body>
-
-
-</html>
