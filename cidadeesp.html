@@ -1,40 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Identificação da Cidade</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', sans-serif; /* Fonte semelhante à do WhatsApp */
-    }
-  </style>
-</head>
-<body>
-  <script>
-    // Função para obter a localização da cidade
-    function obterCidade() {
-      fetch('https://ipapi.co/json/')
+<script>
+    fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
-          const cidade = data.city || 'Cidade desconhecida';
-          const estado = data.region || 'Estado desconhecido';
-          const mensagem = `soy de la región de ${cidade} ...`;
-          exibirMensagem(mensagem);
+            const pais = data.country_name;
+            const mensagem = `Somos tu tienda de confianza en ${pais}.`;
+            const barraTopo = document.querySelector('#announcement-bar-{{ section.id }}');
+            if (barraTopo) {
+                const mensagemElemento = document.createElement('p');
+                mensagemElemento.innerText = mensagem;
+                mensagemElemento.style.textAlign = 'center'; // Centralizando o texto
+                mensagemElemento.style.margin = '0'; // Removendo margem para alinhar melhor
+                barraTopo.appendChild(mensagemElemento);
+            }
         })
         .catch(error => {
-          console.error('Erro ao obter a localização:', error);
+            console.error('Erro ao identificar o país:', error);
         });
-    }
-
-    // Função para exibir a mensagem
-    function exibirMensagem(mensagem) {
-      const elementoMensagem = document.createElement('p');
-      elementoMensagem.style.color = '#4a4a4a'; // Define a cor como cinza escuro
-      elementoMensagem.textContent = mensagem;
-      document.body.appendChild(elementoMensagem);
-    }
-
-    // Chama a função ao carregar a página
-    window.addEventListener('load', obterCidade);
-  </script>
-</body>
-</html>
+</script>
