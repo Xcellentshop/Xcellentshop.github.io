@@ -20,7 +20,7 @@
         .then(data => {
           const cidade = data.city || 'Cidade desconhecida';
           const estado = data.region || 'Estado desconhecido';
-          const mensagem = `Temos diversos alunos na regição de 👉 ${cidade}, não fique de fora.`;
+          const mensagem = `👉Temos diversos alunos na regição de ${cidade}, não fique de fora.`;
           exibirMensagem(mensagem);
         })
         .catch(error => {
