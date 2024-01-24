@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagem Dinâmica</title>
   <style>
-    /* Container para a imagem e sobreposição */
+    /* Estilos para o contêiner da imagem */
     .container {
       position: relative;
-      width: 300px; /* Ajuste conforme necessário */
+      width: 600px; /* Ajuste conforme necessário */
     }
 
-    /* Imagem de fundo */
+    /* Estilos para a imagem de fundo */
     .imagem {
       width: 100%;
       height: auto;
     }
 
-    /* Sobreposição de texto */
+    /* Estilos para a sobreposição de texto */
     .sobreposicao {
       position: absolute;
       top: 50%;
@@ -30,13 +31,41 @@
 </head>
 <body>
 
-<div class="container">
-  <img src="https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg" alt="Imagem de Fundo" class="imagem">
-  <div class="sobreposicao">
-    <p>{{Nome}}</p>
-    <p>{{Localizacao}}</p>
+<!-- Contêiner para a imagem e sobreposição -->
+<div class="container" id="imagemContainer">
+  <!-- Imagem de fundo (inicialmente vazia) -->
+  <img src="" alt="Imagem de Fundo" class="imagem" id="imagemFundo">
+
+  <!-- Sobreposição de texto -->
+  <div class="sobreposicao" id="sobreposicao">
+    <!-- Texto dinâmico aparecerá aqui -->
   </div>
 </div>
+
+<script>
+  // Função para obter parâmetros da URL
+  function obterParametroUrl(nome) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    return urlSearchParams.get(nome);
+  }
+
+  // Função para atualizar dinamicamente a imagem e sobreposição
+  function atualizarImagem() {
+    const localidade = obterParametroUrl('localidade');
+    const nome = obterParametroUrl('nome');
+
+    // Atualizar a imagem de fundo com a URL dinâmica
+    const imagemFundo = document.getElementById('imagemFundo');
+    imagemFundo.src = `https://xcellentshop.github.io/oiamore1?localidade=${localidade}&name=${nome}`;
+
+    // Atualizar a sobreposição de texto
+    const sobreposicao = document.getElementById('sobreposicao');
+    sobreposicao.innerHTML = `<p>${nome}</p><p>${localidade}</p>`;
+  }
+
+  // Chamar a função ao carregar a página
+  window.onload = atualizarImagem;
+</script>
 
 </body>
 </html>
