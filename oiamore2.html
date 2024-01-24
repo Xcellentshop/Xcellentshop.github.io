@@ -8,13 +8,14 @@
     /* Estilos para o contêiner do canvas */
     .container {
       position: relative;
-      width: 600px; /* Ajuste conforme necessário */
+      width: 350px; /* Ajuste para o tamanho desejado */
+      height: 350px; /* Ajuste para o tamanho desejado */
     }
 
     /* Estilos para o canvas */
     canvas {
       width: 100%;
-      height: auto;
+      height: 100%;
     }
 
     /* Estilos para a sobreposição de texto */
@@ -64,10 +65,10 @@
 
     // Quando a imagem for carregada, desenhá-la no canvas
     imagemFundo.onload = function() {
-      canvas.width = imagemFundo.width;
-      canvas.height = imagemFundo.height;
+      canvas.width = 350; // Definir a largura desejada
+      canvas.height = 350; // Definir a altura desejada
 
-      ctx.drawImage(imagemFundo, 0, 0);
+      ctx.drawImage(imagemFundo, 0, 0, 350, 350); // Desenhar a imagem com as dimensões desejadas
 
       // Adicionar texto dinâmico
       ctx.fillStyle = 'white';
