@@ -23,16 +23,18 @@
     /* Estilos para a sobreposição de texto */
     .sobreposicao {
       position: absolute;
-      top: 50%;
+      top: 65%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-align: center;
+      text-align: left; /* Ajuste para alinhar o texto à esquerda */
       color: white;
-      font-size: 18px; /* Ajuste conforme necessário */
+      font-size: 20px; /* Tamanho de fonte ajustado para 22px */
       background: rgba(0, 0, 0, 0.5); /* Fundo transparente */
       padding: 10px; /* Espaçamento interno */
       border-radius: 5px; /* Borda arredondada */
-    }
+      white-space: pre-wrap; /* Permite a quebra de linha */
+      word-wrap: break-word; /* Permite que o texto quebre e não ultrapasse a largura máxima */
+}
   </style>
 </head>
 <body>
@@ -64,15 +66,15 @@
     const imagem = document.getElementById('imagem');
     const sobreposicao = document.getElementById('sobreposicao');
 
-    // Verificar se as variáveis são definidas antes de exibir
-    if (localidade !== null && nome !== null) {
+    // Verificar se a variável localidade é definida antes de exibir
+    if (localidade !== null) {
       // Definir a fonte da imagem dinâmica
       imagem.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&nome=${nome}`;
 
       // Adicionar texto dinâmico à sobreposição
-      sobreposicao.innerHTML = `<p>${nome}</p><p>${localidade}</p>`;
+      sobreposicao.innerHTML = `<p>Chegamos em sua região!  ${localidade}</p>`;
     } else {
-      // Se uma variável for nula, ocultar a sobreposição
+      // Se a variável localidade for nula, ocultar a sobreposição
       sobreposicao.style.display = 'none';
     }
   }
