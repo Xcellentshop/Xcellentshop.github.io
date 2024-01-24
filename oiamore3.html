@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .video-Klwwdo5045562 {
-            max-width: 100%;
-            margin: auto;
-            position: relative;
-            padding-bottom: 56.25%;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagem Dinâmica Responsiva</title>
+  <style>
+    /* Estilos para o contêiner da imagem */
+    .container {
+      position: relative;
+      width: 100%; /* Ocupar 100% da largura do pai */
+      max-width: 350px; /* Largura máxima para garantir responsividade */
+      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
+    }
 
-        .video-lJikjX5048633 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+    /* Estilos para a imagem */
+    img {
+      width: 100%;
+      height: auto; /* Altura automática para manter a proporção da imagem */
+      display: block; /* Remover espaço extra abaixo da imagem */
+    }
 
-        #ifr_63beeaf17560dc00098efbe2 {
-            width: 100%;
-            height: 100%;
-            border: none;
-            box-shadow: none;
-            border-radius: 16px;
-            margin-top: 45px;
-        }
-    </style>
+    /* Estilos para a sobreposição de texto */
+    .sobreposicao {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 18px; /* Ajuste conforme necessário */
+    }
+  </style>
 </head>
 <body>
 
-    <center>
-        <div id="player" class="video-Klwwdo5045562">
-            <div class="video-lJikjX5048633">
-                <div class="video-lJikjX5048633">
-                    <div style="padding:72.8125% 0 0 0;position:relative;">
-                        <iframe frameborder="0" allowfullscreen src="https://file.atendimentochat.store/Biblia%20Comentada/Testemunho%20Andrea.mp4" id="ifr_63beeaf17560dc00098efbe2" style="position:absolute;top:0;left:0;width:100%;height:100%;border: 1px solid #FFFF07;box-shadow: none;border-radius: 16px;margin-top: 45px;" referrerpolicy="origin"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </center>
+<!-- Contêiner para a imagem e sobreposição -->
+<div class="container" id="imagemContainer">
+  <!-- Imagem (para exibir a imagem de fundo) -->
+  <img id="imagem" alt="Imagem Dinâmica">
+
+  <!-- Sobreposição de texto -->
+  <div class="sobreposicao" id="sobreposicao">
+    <!-- Texto dinâmico aparecerá aqui -->
+  </div>
+</div>
+
+<script>
+  // Função para obter parâmetros da URL
+  function obterParametroUrl(nome) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    return urlSearchParams.get(nome);
+  }
+
+  // Função para configurar a imagem e a sobreposição de texto
+  function configurarImagem() {
+    const localidade = obterParametroUrl('localidade');
+    const nome = obterParametroUrl('nome');
+
+    // Obter o elemento da imagem e a sobreposição de texto
+    const imagem = document.getElementById('imagem');
+    const sobreposicao = document.getElementById('sobreposicao');
+
+    // Definir a fonte da imagem dinâmica
+    imagem.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&nome=${nome}`;
+
+    // Adicionar texto dinâmico à sobreposição
+    sobreposicao.innerHTML = `<p>${nome}</p><p>${localidade}</p>`;
+  }
+
+  // Chamar a função ao carregar a página
+  window.onload = configurarImagem;
+</script>
 
 </body>
 </html>
