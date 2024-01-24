@@ -10,6 +10,7 @@
       position: relative;
       width: 100%; /* Ocupar 100% da largura do pai */
       max-width: 350px; /* Largura máxima para garantir responsividade */
+      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
     }
 
     /* Estilos para o canvas */
@@ -71,93 +72,6 @@
       canvas.height = 350 / proporcao; // Calcular a altura proporcional
 
       ctx.drawImage(imagemFundo, 0, 0, canvas.width, canvas.height); // Desenhar a imagem com dimensões proporcionais
-
-      // Adicionar texto dinâmico
-      ctx.fillStyle = 'white';
-      ctx.font = '18px Arial'; // Ajuste conforme necessário
-      ctx.textAlign = 'center';
-      ctx.fillText(nome, canvas.width / 2, canvas.height / 2 - 10);
-      ctx.fillText(localidade, canvas.width / 2, canvas.height / 2 + 10);
-    };
-  }
-
-  // Chamar a função ao carregar a página
-  window.onload = desenharCanvas;
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagem Dinâmica</title>
-  <style>
-    /* Estilos para o contêiner do canvas */
-    .container {
-      position: relative;
-      width: 350px; /* Ajuste para o tamanho desejado */
-      height: 350px; /* Ajuste para o tamanho desejado */
-    }
-
-    /* Estilos para o canvas */
-    canvas {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* Estilos para a sobreposição de texto */
-    .sobreposicao {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: white;
-      font-size: 18px; /* Ajuste conforme necessário */
-    }
-  </style>
-</head>
-<body>
-
-<!-- Contêiner para o canvas e sobreposição -->
-<div class="container" id="canvasContainer">
-  <!-- Canvas (para desenhar a imagem de fundo e o texto) -->
-  <canvas id="canvas"></canvas>
-
-  <!-- Sobreposição de texto -->
-  <div class="sobreposicao" id="sobreposicao">
-    <!-- Texto dinâmico aparecerá aqui -->
-  </div>
-</div>
-
-<script>
-  // Função para obter parâmetros da URL
-  function obterParametroUrl(nome) {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    return urlSearchParams.get(nome);
-  }
-
-  // Função para desenhar a imagem de fundo e o texto no canvas
-  function desenharCanvas() {
-    const localidade = obterParametroUrl('localidade');
-    const nome = obterParametroUrl('nome');
-
-    // Obter o elemento canvas e seu contexto
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // Criar uma nova imagem de fundo
-    const imagemFundo = new Image();
-    imagemFundo.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&nome=${nome}`;
-
-    // Quando a imagem for carregada, desenhá-la no canvas
-    imagemFundo.onload = function() {
-      canvas.width = 350; // Definir a largura desejada
-      canvas.height = 350; // Definir a altura desejada
-
-      ctx.drawImage(imagemFundo, 0, 0, 350, 350); // Desenhar a imagem com as dimensões desejadas
 
       // Adicionar texto dinâmico
       ctx.fillStyle = 'white';
