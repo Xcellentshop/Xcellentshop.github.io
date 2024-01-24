@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagem Dinâmica</title>
+  <title>Imagem Dinâmica Responsiva</title>
   <style>
     /* Estilos para o contêiner da imagem */
     .container {
       position: relative;
-      width: 600px; /* Ajuste conforme necessário */
+      width: 100%; /* Ocupar 100% da largura do pai */
+      max-width: 350px; /* Largura máxima para garantir responsividade */
+      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
     }
 
-    /* Estilos para a imagem de fundo */
-    .imagem {
+    /* Estilos para a imagem */
+    img {
       width: 100%;
-      height: auto;
+      height: auto; /* Altura automática para manter a proporção da imagem */
+      display: block; /* Remover espaço extra abaixo da imagem */
     }
 
     /* Estilos para a sobreposição de texto */
@@ -26,6 +29,9 @@
       text-align: center;
       color: white;
       font-size: 18px; /* Ajuste conforme necessário */
+      background: rgba(0, 0, 0, 0.5); /* Fundo transparente */
+      padding: 10px; /* Espaçamento interno */
+      border-radius: 5px; /* Borda arredondada */
     }
   </style>
 </head>
@@ -33,8 +39,8 @@
 
 <!-- Contêiner para a imagem e sobreposição -->
 <div class="container" id="imagemContainer">
-  <!-- Imagem de fundo (inicialmente vazia) -->
-  <img src="" alt="Imagem de Fundo" class="imagem" id="imagemFundo">
+  <!-- Imagem (para exibir a imagem de fundo) -->
+  <img id="imagem" alt="Imagem Dinâmica">
 
   <!-- Sobreposição de texto -->
   <div class="sobreposicao" id="sobreposicao">
@@ -49,22 +55,30 @@
     return urlSearchParams.get(nome);
   }
 
-  // Função para atualizar dinamicamente a imagem e sobreposição
-  function atualizarImagem() {
+  // Função para configurar a imagem e a sobreposição de texto
+  function configurarImagem() {
     const localidade = obterParametroUrl('localidade');
     const nome = obterParametroUrl('nome');
 
-    // Atualizar a imagem de fundo com a URL dinâmica
-    const imagemFundo = document.getElementById('imagemFundo');
-    imagemFundo.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&nome=${nome}`;
-
-    // Atualizar a sobreposição de texto
+    // Obter o elemento da imagem e a sobreposição de texto
+    const imagem = document.getElementById('imagem');
     const sobreposicao = document.getElementById('sobreposicao');
-    sobreposicao.innerHTML = `<p>${nome}</p><p>${localidade}</p>`;
+
+    // Verificar se as variáveis são definidas antes de exibir
+    if (localidade !== null && nome !== null) {
+      // Definir a fonte da imagem dinâmica
+      imagem.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&nome=${nome}`;
+
+      // Adicionar texto dinâmico à sobreposição
+      sobreposicao.innerHTML = `<p>${nome}</p><p>${localidade}</p>`;
+    } else {
+      // Se uma variável for nula, ocultar a sobreposição
+      sobreposicao.style.display = 'none';
+    }
   }
 
   // Chamar a função ao carregar a página
-  window.onload = atualizarImagem;
+  window.onload = configurarImagem;
 </script>
 
 </body>
