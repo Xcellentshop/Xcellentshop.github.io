@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .video-Klwwdo5045562 {
-            max-width: 100%;
-            margin: auto;
-            position: relative;
-            padding-bottom: 56.25%;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagem Dinâmica</title>
+  <style>
+    /* Estilos para o contêiner do canvas */
+    .container {
+      position: relative;
+      width: 600px; /* Ajuste conforme necessário */
+    }
 
-        .video-lJikjX5048633 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+    /* Estilos para o canvas */
+    canvas {
+      width: 100%;
+      height: auto;
+    }
 
-        #ifr_63beeaf17560dc00098efbe2 {
-            width: 100%;
-            height: 100%;
-            border: none;
-            box-shadow: none;
-            border-radius: 16px;
-            margin-top: 45px;
-        }
-    </style>
+    /* Estilos para a sobreposição de texto */
+    .sobreposicao {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 18px; /* Ajuste conforme necessário */
+    }
+  </style>
 </head>
 <body>
 
-    <center>
-        <div id="player" class="video-Klwwdo5045562">
-            <div class="video-lJikjX5048633">
-                <div class="video-lJikjX5048633">
-                    <div style="padding:72.8125% 0 0 0;position:relative;">
-                        <iframe frameborder="0" allowfullscreen src="https://file.atendimentochat.store/Biblia%20Comentada/Testemunho%20-%20Bruno.mp4" id="ifr_63beeaf17560dc00098efbe2" style="position:absolute;top:0;left:0;width:100%;height:100%;border: 1px solid #FFFF07;box-shadow: none;border-radius: 16px;margin-top: 45px;" referrerpolicy="origin"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </center>
+<!-- Contêiner para o canvas e sobreposição -->
+<div class="container" id="canvasContainer">
+  <!-- Canvas (para desenhar a imagem de fundo e o texto) -->
+  <canvas id="canvas"></canvas>
+
+  <!-- Sobreposição de texto -->
+  <div class="sobreposicao" id="sobreposicao">
+    <!-- Texto dinâmico aparecerá aqui -->
+  </div>
+</div>
+
+<script>
+  // Função para obter parâmetros da URL
+  function obterParametroUrl(nome) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    return urlSearchParams.get(nome);
+  }
+
+  // Função para desenhar a imagem de fundo e o texto no canvas
+  function desenharCanvas() {
+    const localidade = obterParametroUrl('localidade');
+    const nome = obterParametroUrl('nome');
+
+    // Obter o elemento canvas e seu contexto
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Criar uma nova imagem de fundo
+    const imagemFundo = new Image();
+    imagemFundo.src = `https://file.atendimentochat.store/Biblia%20Comentada/rodrigo-silva-1200x1200.jpg?localidade=${localidade}&name=${nome}`;
+
+    // Quando a imagem for carregada, desenhá-la no canvas
+    imagemFundo.onload = function() {
+      canvas.width = imagemFundo.width;
+      canvas.height = imagemFundo.height;
+
+      ctx.drawImage(imagemFundo, 0, 0);
+
+      // Adicionar texto dinâmico
+      ctx.fillStyle = 'white';
+      ctx.font = '18px Arial'; // Ajuste conforme necessário
+      ctx.textAlign = 'center';
+      ctx.fillText(nome, canvas.width / 2, canvas.height / 2 - 10);
+      ctx.fillText(localidade, canvas.width / 2, canvas.height / 2 + 10);
+    };
+  }
+
+  // Chamar a função ao carregar a página
+  window.onload = desenharCanvas;
+</script>
 
 </body>
 </html>
