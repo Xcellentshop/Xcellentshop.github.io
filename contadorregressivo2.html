@@ -7,7 +7,6 @@
   <style>
     body {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -15,16 +14,11 @@
       background-color: #f0f0f0;
     }
 
-    #frase {
-      font-family: 'Arial', sans-serif;
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-
     #contador {
       font-family: 'Arial', sans-serif;
       font-size: 3rem;
       text-align: center;
+      position: relative;
     }
 
     #minutos {
@@ -33,17 +27,32 @@
 
     #segundos {
       color: red;
+      position: relative;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-left: 5px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(10px);
+      }
     }
   </style>
 </head>
 <body>
 
-<div id="frase">
-  Reserva de vaga expira:
-</div>
-
 <div id="contador">
   <span id="minutos">05</span>:<span id="segundos">00</span>
+  <span class="arrow">▼</span>
 </div>
 
 <script>
@@ -67,7 +76,7 @@
     // Verificar se o tempo acabou
     if (diferenca <= 0) {
       clearInterval(intervalo); // Parar o intervalo
-      document.getElementById('contador').innerHTML = '<span style="color: red;">Clique abaixo e Garanta a Vaga! </span>';
+      document.getElementById('contador').innerHTML = '<span style="color: red;">Tempo Encerrado!</span>';
     }
   }, 1000); // Atualizar a cada segundo
 </script>
