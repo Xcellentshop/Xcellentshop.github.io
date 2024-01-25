@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Regressivo</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    #contador {
+      font-family: 'Arial', sans-serif;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    #minutos {
+      color: black;
+    }
+
+    #segundos {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="contador">
+  <span id="minutos">05</span>:<span id="segundos">00</span>
+</div>
+
+<script>
+  // Definir a data de início (5 minutos)
+  const dataInicio = new Date();
+  dataInicio.setMinutes(dataInicio.getMinutes() + 5);
+
+  // Atualizar o contador a cada segundo
+  const intervalo = setInterval(() => {
+    const agora = new Date();
+    const diferenca = dataInicio - agora;
+
+    // Calcular minutos e segundos restantes
+    const minutosRestantes = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+    const segundosRestantes = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+    // Atualizar o conteúdo do HTML
+    document.getElementById('minutos').textContent = minutosRestantes.toString().padStart(2, '0');
+    document.getElementById('segundos').textContent = segundosRestantes.toString().padStart(2, '0');
+
+    // Verificar se o tempo acabou
+    if (diferenca <= 0) {
+      clearInterval(intervalo); // Parar o intervalo
+      document.getElementById('contador').innerHTML = '<span style="color: red;">Tempo Encerrado!</span>';
+    }
+  }, 1000); // Atualizar a cada segundo
+</script>
+
+</body>
+</html>
