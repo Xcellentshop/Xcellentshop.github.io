@@ -39,7 +39,7 @@
 <body>
 
 <div id="frase">
-  Promoção termina em:
+  Reserva de vaga expira:
 </div>
 
 <div id="contador">
@@ -67,7 +67,7 @@
     // Verificar se o tempo acabou
     if (diferenca <= 0) {
       clearInterval(intervalo); // Parar o intervalo
-      document.getElementById('contador').innerHTML = '<span style="color: red;">Tempo Encerrado!</span>';
+      document.getElementById('contador').innerHTML = '<span style="color: red;">Clique abaixo e Garanta a Vaga! </span>';
     }
   }, 1000); // Atualizar a cada segundo
 </script>
