@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Texto para Áudio</title>
+</head>
+<body>
+    <h1>Converter Texto em Áudio</h1>
+    <button id="generateAudio">Gerar Áudio</button>
+    <audio id="audioPlayer" controls></audio>
+
+    <script>
+        document.getElementById('generateAudio').addEventListener('click', function() {
+            // Substitua "{{nome}}" pelo mecanismo de template ou pelo valor desejado antes do carregamento da página
+            const text = "{{nome}}"; // Exemplo: "Este é um exemplo de texto que queremos converter em áudio."
+            const apiKey = "SUA_CHAVE_DE_API_AQUI"; // Inclua sua chave da API aqui
+
+            // Substitua a URL e o corpo da requisição conforme necessário para a API que você está utilizando
+            fetch('https://api.openai.com/v1/endpoint_ficticio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha na geração do áudio');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const audioUrl = URL.createObjectURL(blob);
+                document.getElementById('audioPlayer').src = audioUrl;
+                // Aqui você poderia definir "{{resposta01}}" com o resultado ou a URL do áudio, se estiver usando um sistema de templates
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+    </script>
+</body>
+</html>
