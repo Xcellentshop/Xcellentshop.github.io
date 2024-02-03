@@ -1,42 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Texto para Áudio</title>
-</head>
-<body>
-    <h1>Converter Texto em Áudio</h1>
-    <button id="generateAudio">Gerar Áudio</button>
-    <audio id="audioPlayer" controls></audio>
+const openaiApiKey = "SUA_API_KEY_OPENAI"; // Substitua com a chave da API OpenAI
+const googleProjectId = "SEU_PROJECT_ID_GOOGLE"; // Substitua com o ID do seu projeto na Google Cloud Platform
+const googleApiKey = "SUA_API_KEY_GOOGLE"; // Substitua com a chave da API Speech-to-Text da Google Cloud Platform
 
-    <script>
-        document.getElementById('generateAudio').addEventListener('click', function() {
-            // Substitua "{{nome}}" pelo mecanismo de template ou pelo valor desejado antes do carregamento da página
-            const text = "{{nome}}"; // Exemplo: "Este é um exemplo de texto que queremos converter em áudio."
-            const apiKey = "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"; // Inclua sua chave da API aqui
+function gerarAudio() {
+  const text = $("#texto").val();
+  if (!text) {
+    alert("Digite o texto que você deseja converter em áudio");
+    return;
+  }
 
-            // Substitua a URL e o corpo da requisição conforme necessário para a API que você está utilizando
-            fetch('https://api.openai.com/v1/endpoint_ficticio', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({ text: text })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Falha na geração do áudio');
-                }
-                return response.blob();
-            })
-            .then(blob => {
-                const audioUrl = URL.createObjectURL(blob);
-                document.getElementById('audioPlayer').src = audioUrl;
-                // Aqui você poderia definir "{{resposta01}}" com o resultado ou a URL do áudio, se estiver usando um sistema de templates
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-    </script>
-</body>
-</html>
+  const gerador = $("#geradorAudio").val();
+  if (gerador === "openai") {
+    gerarAudioOpenAI(text);
+  } else if (gerador === "google") {
+    gerarAudioGoogle(text);
+  } else {
+    console.error("Gerador inválido:", gerador);
+  }
+}
+
+function gerarAudioOpenAI(text) {
+  const url = `https://api.openai.com/v1/engines/davinci/completions`;
+  const body = {
+    "prompt": `Gerar áudio a partir do texto: ${text}`,
+    "temperature": 0.7,
+    "max_tokens": 100,
+    "n": 1,
+    "stream": false,
+    "stop": ["\n"]
+  };
+
+  $.ajax({
+    url: url,
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${openaiApiKey}`
+    },
+    contentType: "application/json",
+    data: JSON.stringify(body),
+    success: function(response) {
+      const audioUrl = response.choices[0].text;
+      $("#audioPlayer").attr("src", audioUrl);
+      document.getElementById("audioPlayer").play();
+    },
+    error: function(error) {
+      console.error("Erro:", error);
+    }
+  });
+}
+
+function gerarAudioGoogle(text) {
+  const url = `https://texttospeech.googleapis.com/v1/texttospeech:synthesize?key=${googleApiKey}`;
+  const body = {
+    "config": {
+      "languageCode": "pt-BR",
+      "voice": {
+        "name": "pt-BR-Wavenet-A"
+      },
+      "audioConfig": {
+        "audioEncoding": "MP3"
+      }
+    },
+    "input": {
+      "text": text
+    }
+  };
+
+  $.ajax({
+    url: url,
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(body),
+    success: function(response) {
+      const audioUrl = response.audioContent;
+      $("#audioPlayer").attr("src", audioUrl);
+      document.getElementById("audioPlayer").play();
+    },
+    error: function(error) {
+      console.error("Erro:", error);
+    }
+  });
+}
+
+$("#gerarAudio").click(gerarAudio);
