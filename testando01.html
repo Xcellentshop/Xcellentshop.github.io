@@ -12,9 +12,6 @@
             height: 100vh;
             overflow: hidden;
             margin: 0px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .audio-container {
@@ -22,11 +19,9 @@
             align-items: center;
             justify-content: space-between;
             font-family: 'Open Sans', sans-serif;
+            justify-content: flex-start;
             cursor: pointer;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100px;
         }
 
         .audio-container img {
@@ -34,26 +29,30 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            padding-right: 8px;
+            padding-left: 10px;
         }
 
-        .microphone-icon {
-            margin-left: 20px;
+        .audio-container .microphone-icon {
+            position: relative;
+            margin-left: -67px;
+            margin-bottom: -25px;
             font-size: 22px;
             color: #4ad954;
         }
 
-        #waveform {
-            width: 100%;
-            margin-top: 20px;
+        .audio-container .microphone-icon.blue {
+            color: #3db8ee;
         }
 
-        /* Adicione estilos adicionais conforme necessário */
+        /* Seus outros estilos permanecem aqui */
     </style>
 </head>
 <body>
 <div class="audio-container" id="audioContainer">
-    <!-- Cole o link do Seu áudio Abaixo -->
-    <div id="waveform"></div>
+    <!-- Div para o Wavesurfer.js -->
+    <div id="waveform" style="width: 100%; height: 50px; margin-top: 20px;"></div>
+    <!-- Fim da Div para o Wavesurfer.js -->
     <!-- Cole o link da Sua imagem Abaixo -->
     <img src="https://file.typebot.store/ARQ%20BIBLIA/avatar%20Edson%201.jpg" alt="Imagem">
     <div class="microphone-icon">
@@ -66,25 +65,23 @@
     document.addEventListener('DOMContentLoaded', function () {
         const wavesurfer = WaveSurfer.create({
             container: '#waveform',
-            waveColor: 'violet',
-            progressColor: 'purple',
-            cursorColor: 'navy',
+            waveColor: '#4ad954',
+            progressColor: '#3db8ee',
+            cursorColor: 'transparent', // Oculta o cursor
             barWidth: 2,
-            barRadius: 1,
-            cursorWidth: 1,
-            height: 50,
-            barGap: 3,
-            responsive: true
+            barHeight: 1, // Altura da onda
+            barGap: null // Espaçamento entre barras
         });
 
-        wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3'); // Substitua pelo seu link de áudio
+        // Substitua pelo link do seu áudio
+        wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3');
 
-        const audioContainer = document.getElementById('audioContainer');
-        audioContainer.addEventListener('click', function () {
+        // Reproduzir/pausar no clique
+        document.getElementById('audioContainer').addEventListener('click', function () {
             wavesurfer.playPause();
         });
 
-        // Adicione mais controle de eventos conforme necessário
+        // Adicione mais manipuladores de eventos conforme necessário
     });
 </script>
 </body>
