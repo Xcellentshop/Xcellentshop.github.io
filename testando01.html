@@ -12,6 +12,10 @@
             height: 100vh;
             overflow: hidden;
             margin: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
         }
 
         .audio-container {
@@ -19,9 +23,11 @@
             align-items: center;
             justify-content: space-between;
             font-family: 'Open Sans', sans-serif;
-            justify-content: flex-start;
-            cursor: pointer;
-            width: 100px;
+            width: auto; /* Adjusted from fixed width to auto */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .audio-container img {
@@ -29,32 +35,32 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            padding-right: 8px;
-            padding-left: 10px;
+            margin-right: 15px; /* Adjusted spacing */
         }
 
         .audio-container .microphone-icon {
-            position: relative;
-            margin-left: -67px;
-            margin-bottom: -25px;
             font-size: 22px;
             color: #4ad954;
+            margin-left: 15px; /* Adjusted spacing */
         }
 
         .audio-container .microphone-icon.blue {
             color: #3db8ee;
         }
 
-        /* Seus outros estilos permanecem aqui */
+        #waveform {
+            flex-grow: 1;
+            height: 50px; /* Adjusted for visibility */
+        }
+
+        /* Keep your other styles here */
     </style>
 </head>
 <body>
-<div class="audio-container" id="audioContainer">
-    <!-- Div para o Wavesurfer.js -->
-    <div id="waveform" style="width: 100%; height: 50px; margin-top: 20px;"></div>
-    <!-- Fim da Div para o Wavesurfer.js -->
-    <!-- Cole o link da Sua imagem Abaixo -->
+<div class="audio-container">
+    <!-- Icon and Image -->
     <img src="https://file.typebot.store/ARQ%20BIBLIA/avatar%20Edson%201.jpg" alt="Imagem">
+    <div id="waveform"></div> <!-- Moved inside audio-container -->
     <div class="microphone-icon">
         <i class="fas fa-microphone"></i>
     </div>
@@ -67,21 +73,28 @@
             container: '#waveform',
             waveColor: '#4ad954',
             progressColor: '#3db8ee',
-            cursorColor: 'transparent', // Oculta o cursor
+            cursorColor: 'transparent', // Hide the cursor for a cleaner look
             barWidth: 2,
-            barHeight: 1, // Altura da onda
-            barGap: null // Espaçamento entre barras
+            barHeight: 1, // The height of the wave
+            barGap: null // The optional spacing between bars of the wave, if any
         });
 
-        // Substitua pelo link do seu áudio
+        // Replace with your audio file link
         wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3');
 
-        // Reproduzir/pausar no clique
-        document.getElementById('audioContainer').addEventListener('click', function () {
+        // Play/Pause on container click
+        document.querySelector('.audio-container').addEventListener('click', function () {
             wavesurfer.playPause();
         });
 
-        // Adicione mais manipuladores de eventos conforme necessário
+        // Event listeners for Wavesurfer to handle icons
+        wavesurfer.on('play', function () {
+            document.querySelector('.microphone-icon').classList.add('blue');
+        });
+
+        wavesurfer.on('pause', function () {
+            document.querySelector('.microphone-icon').classList.remove('blue');
+        });
     });
 </script>
 </body>
