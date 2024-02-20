@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Áudio</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
@@ -14,7 +15,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f0f0f0;
         }
 
         .audio-container {
@@ -23,12 +23,10 @@
             justify-content: space-between;
             font-family: 'Open Sans', sans-serif;
             cursor: pointer;
-            width: 100%;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            background-color: white;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .audio-container img {
@@ -38,45 +36,25 @@
             object-fit: cover;
         }
 
-        .audio-container .microphone-icon {
+        .microphone-icon {
             margin-left: 20px;
             font-size: 22px;
             color: #4ad954;
         }
 
-        .track {
-            display: flex;
-            align-items: center;
+        #waveform {
             width: 100%;
+            margin-top: 20px;
         }
 
-        .controls {
-            margin-right: 20px;
-        }
-
-        .timeline {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-
-        .icon {
-            display: flex;
-            align-items: center;
-        }
-
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-left: 10px;
-        }
+        /* Adicione estilos adicionais conforme necessário */
     </style>
 </head>
 <body>
 <div class="audio-container" id="audioContainer">
-    <!-- Cole o link do Seu áudio Abaixo-->
+    <!-- Cole o link do Seu áudio Abaixo -->
     <div id="waveform"></div>
-    <!-- Cole o link da Sua imagem Abaixo-->
+    <!-- Cole o link da Sua imagem Abaixo -->
     <img src="https://file.typebot.store/ARQ%20BIBLIA/avatar%20Edson%201.jpg" alt="Imagem">
     <div class="microphone-icon">
         <i class="fas fa-microphone"></i>
@@ -88,26 +66,25 @@
     document.addEventListener('DOMContentLoaded', function () {
         const wavesurfer = WaveSurfer.create({
             container: '#waveform',
-            waveColor: '#ddd',
-            progressColor: '#4ad954',
-            cursorWidth: 1,
+            waveColor: 'violet',
+            progressColor: 'purple',
+            cursorColor: 'navy',
             barWidth: 2,
+            barRadius: 1,
+            cursorWidth: 1,
             height: 50,
+            barGap: 3,
             responsive: true
         });
 
-        wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3');
-
-        const playPause = function () {
-            if (wavesurfer.isPlaying()) {
-                wavesurfer.pause();
-            } else {
-                wavesurfer.play();
-            }
-        };
+        wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3'); // Substitua pelo seu link de áudio
 
         const audioContainer = document.getElementById('audioContainer');
-        audioContainer.addEventListener('click', playPause);
+        audioContainer.addEventListener('click', function () {
+            wavesurfer.playPause();
+        });
+
+        // Adicione mais controle de eventos conforme necessário
     });
 </script>
 </body>
