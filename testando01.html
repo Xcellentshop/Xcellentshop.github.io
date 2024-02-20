@@ -6,16 +6,13 @@
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.7/plyr.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        /* Seu CSS original permanece inalterado */
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
         body {
             height: 100vh;
             overflow: hidden;
             margin: 0px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
         }
 
         .audio-container {
@@ -23,11 +20,9 @@
             align-items: center;
             justify-content: space-between;
             font-family: 'Open Sans', sans-serif;
-            width: auto; /* Adjusted from fixed width to auto */
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            justify-content: flex-start;
+            cursor: pointer;
+            width: 100px;
         }
 
         .audio-container img {
@@ -35,65 +30,74 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 15px; /* Adjusted spacing */
+            padding-right: 8px;
+            padding-left: 10px;
         }
 
         .audio-container .microphone-icon {
+            position: relative;
+            margin-left: -67px;
+            margin-bottom: -25px;
             font-size: 22px;
             color: #4ad954;
-            margin-left: 15px; /* Adjusted spacing */
         }
 
         .audio-container .microphone-icon.blue {
             color: #3db8ee;
         }
 
-        #waveform {
-            flex-grow: 1;
-            height: 50px; /* Adjusted for visibility */
-        }
-
-        /* Keep your other styles here */
+        /* Estilos específicos do Plyr permanecem aqui */
+        /* Seus outros estilos... */
     </style>
+    <!-- Incluindo o Wavesurfer.js -->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
 </head>
 <body>
-<div class="audio-container">
-    <!-- Icon and Image -->
+<div class="audio-container" id="audioContainer">
+    <!-- Mantenha o link do seu áudio e imagem como estão -->
+    <audio class="plyr" src="https://file.typebot.store/ARQ%20BIBLIA/07.mp3" hidden></audio> <!-- O audio agora está oculto -->
     <img src="https://file.typebot.store/ARQ%20BIBLIA/avatar%20Edson%201.jpg" alt="Imagem">
-    <div id="waveform"></div> <!-- Moved inside audio-container -->
     <div class="microphone-icon">
         <i class="fas fa-microphone"></i>
     </div>
+    <!-- Elemento onde o gráfico de onda será exibido -->
+    <div id="waveform" style="width:100%; margin-top:20px;"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/7.0.5/wavesurfer.min.js"></script>
+<script src="https://cdn.plyr.io/3.6.7/plyr.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const wavesurfer = WaveSurfer.create({
+        // Configuração do Plyr mantida para referência, mas o player será escondido
+        const player = new Plyr('.plyr', {
+            controls: ['play', 'progress', 'current-time', 'duration']
+        });
+
+        // Inicialização do Wavesurfer
+        var waveform = WaveSurfer.create({
             container: '#waveform',
-            waveColor: '#4ad954',
-            progressColor: '#3db8ee',
-            cursorColor: 'transparent', // Hide the cursor for a cleaner look
+            waveColor: 'violet',
+            progressColor: 'purple',
+            cursorColor: 'transparent',
             barWidth: 2,
-            barHeight: 1, // The height of the wave
-            barGap: null // The optional spacing between bars of the wave, if any
+            barHeight: 1,
+            responsive: true,
+            height: 50 // Altura do waveform
         });
 
-        // Replace with your audio file link
-        wavesurfer.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3');
+        // Carregando o arquivo de áudio no Wavesurfer
+        waveform.load('https://file.typebot.store/ARQ%20BIBLIA/07.mp3');
 
-        // Play/Pause on container click
-        document.querySelector('.audio-container').addEventListener('click', function () {
-            wavesurfer.playPause();
-        });
-
-        // Event listeners for Wavesurfer to handle icons
-        wavesurfer.on('play', function () {
+        // Eventos para sincronizar ícones e comportamento de reprodução entre Plyr e Wavesurfer
+        waveform.on('play', function() {
             document.querySelector('.microphone-icon').classList.add('blue');
         });
-
-        wavesurfer.on('pause', function () {
+        waveform.on('pause', function() {
             document.querySelector('.microphone-icon').classList.remove('blue');
+        });
+
+        // Substitua a funcionalidade de clique para usar o Wavesurfer
+        document.getElementById('audioContainer').addEventListener('click', function () {
+            waveform.playPause();
         });
     });
 </script>
