@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagem Dinâmica Responsiva</title>
+  <style>
+    /* Estilos para o contêiner da imagem */
+    .container {
+      position: relative;
+      width: 100%; /* Ocupar 100% da largura do pai */
+      max-width: 350px; /* Largura máxima para garantir responsividade */
+      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
+    }
 
+    /* Estilos para a imagem */
+    img {
+      width: 100%;
+      height: auto; /* Altura automática para manter a proporção da imagem */
+      display: block; /* Remover espaço extra abaixo da imagem */
+    }
+
+    /* Estilos para a sobreposição de texto */
+.sobreposicao {
+  position: absolute;
+  top: 65%;
+  left: 15%; /* Ajuste o valor para posicionar o texto à esquerda */
+  text-align: left; /* Ajuste para alinhar o texto à esquerda */
+  color: #FFFFFF; /* Cor azul #1620B3 */
+  font-size: 16px; /* Tamanho de fonte ajustado para 16px */
+  font-family: 'Arial', cursive; /* Adiciona a fonte handwriting */
+  background: rgba(0, 0, 0, 0.5); /* Fundo transparente */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 5px; /* Borda arredondada */
+  max-width: 80%; /* Largura máxima de 80% do contêiner pai */
+  white-space: pre-wrap; /* Permite a quebra de linha */
+  word-wrap: break-word; /* Permite que o texto quebre e não ultrapasse a largura máxima */
+}
+  </style>
+</head>
+<body>
+
+<!-- Contêiner para a imagem e sobreposição -->
+<div class="container" id="imagemContainer">
+  <!-- Imagem (para exibir a imagem de fundo) -->
+  <img id="imagem" alt="Imagem Dinâmica">
+
+  <!-- Sobreposição de texto -->
+  <div class="sobreposicao" id="sobreposicao">
+    <!-- Texto dinâmico aparecerá aqui -->
+  </div>
+</div>
+
+<script>
+  // Função para obter parâmetros da URL
+  function obterParametroUrl(nome) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    return urlSearchParams.get(nome);
+  }
+
+  // Função para configurar a imagem e a sobreposição de texto
+  function configurarImagem() {
+    const localidade = obterParametroUrl('localidade');
+    const nome = obterParametroUrl('nome');
+
+    // Obter o elemento da imagem e a sobreposição de texto
+    const imagem = document.getElementById('imagem');
+    const sobreposicao = document.getElementById('sobreposicao');
+
+    // Verificar se a variável localidade é definida antes de exibir
+    if (localidade !== null) {
+      // Definir a fonte da imagem dinâmica
+      imagem.src = `https://file.typebot.store/GAME/colar_coracao_cadeado_da_mamae_8.jpg?localidade=${localidade}&nome=${nome}`;
+
+      // Adicionar texto dinâmico à sobreposição
+      sobreposicao.innerHTML = `<p>Chegamos em sua região!  ${localidade}</p>`;
+    } else {
+      // Se a variável localidade for nula, ocultar a sobreposição
+      sobreposicao.style.display = 'none';
+    }
+  }
+
+  // Chamar a função ao carregar a página
+  window.onload = configurarImagem;
+</script>
+
+</body>
+</html>
