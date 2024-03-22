@@ -26,15 +26,11 @@
     /* Estilos para a etiqueta de progresso */
     .progress-label {
       position: absolute;
-      top: -25px; /* Posição acima da barra de progresso */
+      bottom: -25px; /* Posição abaixo da barra de progresso */
       left: 50%;
       transform: translateX(-50%);
       font-size: 14px;
       font-weight: bold; /* Negrito */
-    }
-
-    /* Estilos para a frase "assertividade" */
-    .assertividade {
       color: #000000; /* Cor preta */
     }
   </style>
@@ -45,7 +41,7 @@
     <div class="progress-fill" id="progressFill"></div>
     <!-- Etiqueta de progresso -->
     <div class="progress-label" id="progressLabel">
-      <span id="percentage">0%</span> <strong class="assertividade">assertividade</strong> <!-- Palavra em negrito e com cor preta -->
+      <span id="percentage">0%</span> assertividade <!-- Palavra em preto -->
     </div>
   </div>
 
@@ -60,6 +56,7 @@
       var progress = generateRandomNumber(); // Gerar um número aleatório
       var progressBar = document.getElementById('progressFill');
       var progressLabel = document.getElementById('percentage');
+      var progressLabelText = document.getElementById('progressLabel');
 
       progressBar.style.width = progress + '%'; // Atualizar a largura da barra de progresso
       progressLabel.textContent = progress + '%'; // Atualizar o texto da porcentagem
@@ -69,6 +66,9 @@
       } else {
         progressBar.style.backgroundColor = '#4caf50'; // Cor padrão da barra de progresso
       }
+
+      // Atualizar a posição da etiqueta de progresso
+      progressLabelText.style.left = progress + '%';
     }
 
     // Chamar a função inicialmente para atualizar a barra de progresso
