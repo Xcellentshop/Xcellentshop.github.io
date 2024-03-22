@@ -7,7 +7,13 @@
 <style>
     .image-container {
         position: relative;
-        width: 600px; /* Largura da imagem */
+        max-width: 322px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .image-container img {
+        max-width: 100%;
         height: auto;
     }
     
@@ -38,7 +44,7 @@
 </head>
 <body>
 <div class="image-container">
-    <img src="https://win10x.site/storage/01HR0XX3BX85T8QANV3ZDSJ838.png" alt="Imagem" width="600">
+    <img src="https://win10x.site/storage/01HR0XX3BX85T8QANV3ZDSJ838.png" alt="Imagem">
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
         <div class="progress-label" id="progressLabel"></div>
