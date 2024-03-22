@@ -7,28 +7,21 @@
   <style>
     /* Estilos para a barra de progresso */
     .progress-bar {
-      position: relative;
       width: 100%;
-      height: 40px; /* Altura da barra de progresso e espaço para a etiqueta */
+      height: 40px; /* Altura da barra de progresso */
       background-color: #f3f3f3;
       margin: 0 auto; /* Centralizar a barra de progresso */
     }
 
     /* Estilos para o preenchimento da barra de progresso */
     .progress-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
       height: 100%;
       background-color: #4caf50; /* Cor de preenchimento padrão */
     }
 
     /* Estilos para a etiqueta de progresso */
     .progress-label {
-      position: absolute;
-      top: calc(100% + 5px); /* Posicionar logo abaixo da barra de progresso */
-      left: 50%;
-      transform: translateX(-50%);
+      text-align: center; /* Centralizar o texto */
       font-size: 14px;
       font-weight: bold; /* Negrito */
       color: #000000; /* Cor preta */
