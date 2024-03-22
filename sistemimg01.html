@@ -5,34 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barra de Progresso Dinâmica</title>
   <style>
-    /* Estilos para o contêiner da imagem */
-    .container {
-      position: relative;
-      width: 100%; /* Ocupar 100% da largura do pai */
-      max-width: 350px; /* Largura máxima para garantir responsividade */
-      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
-      margin: 0 auto; /* Centralizar o contêiner */
-    }
-
-    /* Estilos para a imagem */
-    img {
-      max-width: 100%;
-      height: auto; /* Altura automática para manter a proporção da imagem */
-      display: block; /* Remover espaço extra abaixo da imagem */
-    }
-
     /* Estilos para a barra de progresso */
     .progress-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
+      position: relative;
       width: 100%;
       height: 20px; /* Altura da barra de progresso */
       background-color: #f3f3f3;
+      margin: 0 auto; /* Centralizar a barra de progresso */
     }
 
     /* Estilos para o preenchimento da barra de progresso */
     .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
       height: 100%;
       background-color: #4caf50; /* Cor de preenchimento padrão */
     }
@@ -40,7 +26,7 @@
     /* Estilos para a etiqueta de progresso */
     .progress-label {
       position: absolute;
-      bottom: -25px; /* Posição sobre a barra de progresso */
+      top: -25px; /* Posição acima da barra de progresso */
       left: 50%;
       transform: translateX(-50%);
       font-size: 14px;
@@ -50,17 +36,12 @@
   </style>
 </head>
 <body>
-  <!-- Contêiner para a imagem e a barra de progresso -->
-  <div class="container">
-    <!-- Imagem (para exibir a imagem de fundo) -->
-    <img src="https://win10x.site/storage/01HR0XX3BX85T8QANV3ZDSJ838.png" alt="Imagem">
-    <!-- Barra de progresso -->
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-      <!-- Etiqueta de progresso -->
-      <div class="progress-label" id="progressLabel">
-        <span id="percentage">0%</span> <strong>assertividade</strong> <!-- Palavra em negrito -->
-      </div>
+  <!-- Barra de progresso -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+    <!-- Etiqueta de progresso -->
+    <div class="progress-label" id="progressLabel">
+      <span id="percentage">0%</span> <strong>assertividade</strong> <!-- Palavra em negrito -->
     </div>
   </div>
 
