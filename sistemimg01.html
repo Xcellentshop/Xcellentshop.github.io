@@ -1,82 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barra de Progresso Dinâmica</title>
-<style>
-    .image-container {
-        position: relative;
-        max-width: 322px;
-        width: 100%;
-        margin: 0 auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barra de Progresso Dinâmica</title>
+  <style>
+    /* Estilos para o contêiner da imagem */
+    .container {
+      position: relative;
+      width: 100%; /* Ocupar 100% da largura do pai */
+      max-width: 350px; /* Largura máxima para garantir responsividade */
+      vertical-align: top; /* Evitar espaço em branco abaixo da imagem */
+      margin: 0 auto; /* Centralizar o contêiner */
     }
-    
-    .image-container img {
-        max-width: 100%;
-        height: auto;
+
+    /* Estilos para a imagem */
+    img {
+      max-width: 100%;
+      height: auto; /* Altura automática para manter a proporção da imagem */
+      display: block; /* Remover espaço extra abaixo da imagem */
     }
-    
+
+    /* Estilos para a barra de progresso */
     .progress-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 20px; /* Altura da barra de progresso */
-        background-color: #f3f3f3;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20px; /* Altura da barra de progresso */
+      background-color: #f3f3f3;
     }
-    
+
+    /* Estilos para o preenchimento da barra de progresso */
     .progress-fill {
-        height: 100%;
-        background-color: #4caf50; /* Cor de preenchimento */
+      height: 100%;
+      background-color: #4caf50; /* Cor de preenchimento padrão */
     }
-    
+
+    /* Estilos para a etiqueta de progresso */
     .progress-label {
-        position: absolute;
-        bottom: 25px; /* Espaço entre a barra de progresso e o número */
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 14px;
-        color: #ffffff;
-        font-weight: bold;
+      position: absolute;
+      bottom: 25px; /* Espaço entre a barra de progresso e o número */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: bold;
     }
-</style>
+  </style>
 </head>
 <body>
-<div class="image-container">
+  <!-- Contêiner para a imagem e a barra de progresso -->
+  <div class="container">
+    <!-- Imagem (para exibir a imagem de fundo) -->
     <img src="https://win10x.site/storage/01HR0XX3BX85T8QANV3ZDSJ838.png" alt="Imagem">
+    <!-- Barra de progresso -->
     <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-        <div class="progress-label" id="progressLabel"></div>
+      <div class="progress-fill" id="progressFill"></div>
+      <div class="progress-label" id="progressLabel"></div>
     </div>
-</div>
+  </div>
 
-<script>
-// Função para gerar um número aleatório entre 90 e 100
-function generateRandomNumber() {
-    return Math.floor(Math.random() * (100 - 90 + 1)) + 90;
-}
-
-// Função para atualizar a barra de progresso
-function updateProgressBar() {
-    var progress = generateRandomNumber(); // Gerar um número aleatório
-    var progressBar = document.getElementById('progressFill');
-    var progressLabel = document.getElementById('progressLabel');
-    
-    progressBar.style.width = progress + '%'; // Atualizar a largura da barra de progresso
-    progressLabel.textContent = progress + '%'; // Atualizar o texto da porcentagem
-    if (progress >= 90) {
-        progressBar.style.backgroundColor = '#ff0000'; // Alterar a cor da barra de progresso se for maior que 90%
-    } else {
-        progressBar.style.backgroundColor = '#4caf50'; // Cor padrão da barra de progresso
+  <script>
+    // Função para gerar um número aleatório entre 90 e 100
+    function generateRandomNumber() {
+      return Math.floor(Math.random() * (100 - 90 + 1)) + 90;
     }
-}
 
-// Chamar a função inicialmente para atualizar a barra de progresso
-updateProgressBar();
+    // Função para atualizar a barra de progresso
+    function updateProgressBar() {
+      var progress = generateRandomNumber(); // Gerar um número aleatório
+      var progressBar = document.getElementById('progressFill');
+      var progressLabel = document.getElementById('progressLabel');
 
-// Atualizar a barra de progresso a cada 3 segundos (3000 milissegundos)
-setInterval(updateProgressBar, 3000);
-</script>
+      progressBar.style.width = progress + '%'; // Atualizar a largura da barra de progresso
+      progressLabel.textContent = progress + '%'; // Atualizar o texto da porcentagem
+
+      if (progress >= 90) {
+        progressBar.style.backgroundColor = '#ff0000'; // Alterar a cor da barra de progresso se for maior que 90%
+      } else {
+        progressBar.style.backgroundColor = '#4caf50'; // Cor padrão da barra de progresso
+      }
+    }
+
+    // Chamar a função inicialmente para atualizar a barra de progresso
+    updateProgressBar();
+
+    // Atualizar a barra de progresso a cada 3 segundos (3000 milissegundos)
+    setInterval(updateProgressBar, 3000);
+  </script>
 </body>
 </html>
