@@ -40,7 +40,7 @@
     /* Estilos para a etiqueta de progresso */
     .progress-label {
       position: absolute;
-      bottom: 25px; /* Espaço entre a barra de progresso e o número */
+      top: -25px; /* Posição sobre a barra de progresso */
       left: 50%;
       transform: translateX(-50%);
       font-size: 14px;
@@ -57,7 +57,10 @@
     <!-- Barra de progresso -->
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill"></div>
-      <div class="progress-label" id="progressLabel"></div>
+      <!-- Etiqueta de progresso -->
+      <div class="progress-label" id="progressLabel">
+        <span id="percentage">0%</span> assertividade
+      </div>
     </div>
   </div>
 
@@ -71,7 +74,7 @@
     function updateProgressBar() {
       var progress = generateRandomNumber(); // Gerar um número aleatório
       var progressBar = document.getElementById('progressFill');
-      var progressLabel = document.getElementById('progressLabel');
+      var progressLabel = document.getElementById('percentage');
 
       progressBar.style.width = progress + '%'; // Atualizar a largura da barra de progresso
       progressLabel.textContent = progress + '%'; // Atualizar o texto da porcentagem
