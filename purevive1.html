@@ -63,26 +63,24 @@
   // Função para configurar a imagem e a sobreposição de texto
   function configurarImagem() {
     const nome = obterParametroUrl('nome');
-    const remoteJid = obterParametroUrl('remoteJid');
-    const correlationID = obterParametroUrl('correlationID');
 
     // Obter o elemento da imagem e a sobreposição de texto
     const imagem = document.getElementById('imagem');
     const sobreposicao = document.getElementById('sobreposicao');
 
-    // Verificar se alguma das variáveis é nula antes de exibir
-    if (!nome || !remoteJid || !correlationID) {
-      // Se qualquer uma das variáveis for nula, ocultar a sobreposição
+    // Verificar se o nome está definido antes de exibir
+    if (!nome) {
+      // Se o nome for nulo, ocultar a sobreposição
       sobreposicao.style.display = 'none';
     } else {
-      // Se todas as variáveis estiverem definidas, exibir a sobreposição
+      // Se o nome estiver definido, exibir a sobreposição
       sobreposicao.style.display = 'block';
 
       // Definir a fonte da imagem dinâmica
       imagem.src = `https://file.typebot.store/CAPS/reserverd1.jpg`;
 
       // Adicionar texto dinâmico à sobreposição
-      sobreposicao.innerHTML = `<p>${nome}</p><p>${remoteJid}</p><p>${correlationID}</p>`;
+      sobreposicao.innerHTML = `<p>${nome}</p>`;
     }
   }
 
