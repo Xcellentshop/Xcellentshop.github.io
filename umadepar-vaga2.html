@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fonte cursiva semelhante a letra de caneta -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  
+  <title>Imagem Dinâmica Responsiva</title>
+  <style>
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      vertical-align: top;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sobreposicao {
+      position: absolute;
+      top: 51%;
+      left: 17%;
+      text-align: left;
+      color: #1620B3; /* Azul estilo caneta */
+      font-size: 16px;
+      font-family: 'Dancing Script', cursive;
+      background: rgba(0, 0, 0, 0);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 80%;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="imagemContainer">
+  <img id="imagem" alt="Imagem Dinâmica">
+  <div class="sobreposicao" id="sobreposicao"></div>
+</div>
+
+<script>
+  function obterParametroUrl(nome) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    return urlSearchParams.get(nome);
+  }
+
+  function configurarImagem() {
+    const nome = obterParametroUrl('nome');
+    const remoteJid = obterParametroUrl('remoteJid');
+    const correlationID = obterParametroUrl('correlationID');
+
+    const imagem = document.getElementById('imagem');
+    const sobreposicao = document.getElementById('sobreposicao');
+
+    if (!nome || !remoteJid || !correlationID) {
+      sobreposicao.style.display = 'none';
+    } else {
+      sobreposicao.style.display = 'block';
+      imagem.src = `https://raw.githubusercontent.com/Xcellentshop/Xcellentshop.github.io/refs/heads/main/vagaumadepar.jpg`;
+      sobreposicao.innerHTML = `<p>${nome}</p><p>${remoteJid}</p><p>${correlationID}</p>`;
+    }
+  }
+
+  window.onload = configurarImagem;
+</script>
+
+</body>
+</html>
